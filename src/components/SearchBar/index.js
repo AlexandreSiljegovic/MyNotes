@@ -19,8 +19,10 @@ function searchBar() {
         
             
         return(
+          <View style={Style.containerSearch}>
                  <View style={[Style.searchArea]}>
                          <TextInput placeholder="search Tasks.." maxLength={50} onChangeText={(text) => search(text)} />
+                </View>
                 </View>
                 )
 }

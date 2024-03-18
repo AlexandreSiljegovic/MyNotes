@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         paddingTop : 20,
         margintop : 20,
     },
-    newNoteButton : {
+    addNoteButton : {
         zIndex : 9,
         position : 'absolute',
         bottom : 20,
@@ -32,6 +32,22 @@ const styles = StyleSheet.create({
         fontWeight : 'bold',
         textAlign : 'center',
         margin : 20, 
+        
+    },
+    search: {
+        backgroundColor : '#fff',
+        padding : 10,
+        height : '20%',
+        borderRadius : 10,
+        marginBottom : 20,
+        shadowColor : '#000',
+        shadowOffset : {
+            width : 0,
+            height : 2,
+        },
+        shadowOpacity : 0.25,
+        shadowRadius : 3.84,
+        elevation : 5,
     },
  });
 
