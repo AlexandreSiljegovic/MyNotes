@@ -8,9 +8,9 @@ const styles = StyleSheet.create({
         margintop : 20,
     },
     addNoteButton : {
-        zIndex : 9,
+        zIndex : 10,
         position : 'absolute',
-        bottom : 20,
+        bottom : 23,
         right : 20,
         backgroundColor : '#fff',
         borderRadius : 100,
@@ -49,6 +49,15 @@ const styles = StyleSheet.create({
         shadowRadius : 3.84,
         elevation : 5,
     },
+    searchArea : {
+        width : '100%',
+        alignItems : 'center',
+        justifyContent : 'center',
+        
+    },
+   safeArea : {
+    height : '100%',
+   }
  });
 
  export default styles;

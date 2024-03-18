@@ -38,6 +38,17 @@ const Style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10,
+    },
+    select : {
+        width: '100%',
+        padding: 15,
+        borderWidth: 0.6,
+        borderRadius: 15,
+        marginBottom: 20,
+        height : '15%'
+        
+
+
     }
 });
 
