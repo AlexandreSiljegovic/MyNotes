@@ -8,7 +8,7 @@ export default function renderNote({ item, navigation }) {
 
  const formatDate = (dateString) => {
     const date = new Date(dateString);
-    // Options de formatage de date
+    //  formatage de date
     const options = {
       year: "numeric",
       month: "long",
@@ -16,7 +16,7 @@ export default function renderNote({ item, navigation }) {
       hour: "2-digit",
       minute: "2-digit",
     };
-    // Formater la date en utilisant les options spécifiées
+    
     return date.toLocaleDateString("en-US", options);
   };
 

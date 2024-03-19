@@ -18,7 +18,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
 
-export default function Notes({ route, navigation, importance }) {
+export default function Notes({ route, navigation }) {
   const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 16,
@@ -77,22 +77,7 @@ export default function Notes({ route, navigation, importance }) {
 
  
 
-  // Apply dynamic background color based on importance
-  // const noteStyles = {
-  //   backgroundColor: getBackgroundColor(),
-  //   padding: 10,
-  //   marginBottom: 10,
-  //   borderRadius: 10,
-  //   shadowColor: "#000",
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 2,
-  //   },
-  //   shadowOpacity: 0.25,
-  //   shadowRadius: 3.84,
-  //   elevation: 5,
-  // };
-
+ 
   
   useEffect(() => {
     if (route.params.note) {
@@ -107,7 +92,7 @@ export default function Notes({ route, navigation, importance }) {
 const handleImportantChange = (importance) => {
     setNote(prevNote => ({
       ...prevNote,
-      importance: importance // Update the importance property of the note state
+      importance: importance 
     }));
   };
 
@@ -116,7 +101,7 @@ const handleImportantChange = (importance) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accesible={false}>
         <TextInput
           style={Style.txtTitleNote}
-          autoFocus={true}
+          autoFocus={false}
           maxLength={40}
           value={note.title}
           placeholder={"Title"}

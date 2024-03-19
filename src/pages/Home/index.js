@@ -15,12 +15,13 @@ import SearchBar from "../../components/SearchBar";
 import Style from "./style";
 import Colors from "../../styles/colors";
 import Notes from "../../components/RenderNotes";
+import {Feather} from "@expo/vector-icons";
+import { BulbFilled, BulbOutlined } from "@ant-design/icons";
 
-
-export default function Home({ navigation, }) {
+export default function Home({ navigation }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-   
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -43,7 +44,19 @@ export default function Home({ navigation, }) {
       getData();
     }, [])
   );
-  
+
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
+  const containerStyle = {
+    ...[Style.safeArea, Style.header],
+    backgroundColor: isDarkMode ? "#000" : "#fff",
+  };
+
+  const textStyle = {
+    color: isDarkMode ? "#fff" : "#000",
+  };
 
   if (loading) {
     return (
@@ -53,29 +66,42 @@ export default function Home({ navigation, }) {
     );
   } else {
     return (
-      <SafeAreaView style={Style.safeArea} >
-        <Text style={Style.txTitle}>MyNotes</Text>
-        <View style={Style.searchArea}>
-          <SearchBar data={data} onChange={setData} />
+      <SafeAreaView style={containerStyle}>
+        <View style={Style.header}>
+          <View style={{flexDirection : 'row', justifyContent :'flex-end', marginRight : 30, marginTop : 20}}>
+           <TouchableOpacity onPress={toggleDarkMode}>
+            {isDarkMode ? (
+              <Feather name="sun" style={{ fontSize: 30, color: "white" }} />
+            ) : (
+              <Feather name="moon" style={{ fontSize: 30, color: "black" }}  />
+            )}
+          </TouchableOpacity>
+          </View>
+          <Text style={{ ...Style.txTitle, ...textStyle }}>MyNotes</Text>
+         
+          <View style={Style.searchArea}>
+            <SearchBar data={data} onChange={setData} />
+          </View>
+          
         </View>
-        <FlatList
+        <FlatList style={{width : '90%', alignSelf : 'center'}}
           ListEmptyComponent={
-            <Text style={{ textAlign: "center" }}>No Notes yet ! </Text>
+            <Text style={{ textAlign: "center", ...textStyle }}>
+              No Notes yet !
+            </Text>
           }
           data={data}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item, }) => {
-           
-            return <Notes item={item} navigation={navigation} />;
+          renderItem={({ item }) => {
+            return <Notes item={item} navigation={navigation}  />;
           }}
         />
         <TouchableOpacity
           style={Style.addNoteButton}
           onPress={() => navigation.navigate("Notes", { search: false })}
         >
-          <AntDesign name="pluscircle" size={60} color={Colors.addButton} />
+          <AntDesign name="pluscircle" size={60} style={textStyle} />
         </TouchableOpacity>
-       
       </SafeAreaView>
     );
   }

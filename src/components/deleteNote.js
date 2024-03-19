@@ -27,9 +27,7 @@ async function deleteNote(note, navigation) {
                     data.splice(i,1);
                 }
             }
-            if(note.notificationId !== null){
-                await Notifications.cancelScheduledNotificationAsync(note.notificationId);
-            }
+            
             await AsyncStorage.setItem('notes', JSON.stringify(data));
             navigation.goBack();
         } catch (err) {

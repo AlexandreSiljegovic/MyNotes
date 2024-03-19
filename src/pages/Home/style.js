@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
     addNoteButton : {
         zIndex : 10,
         position : 'absolute',
-        bottom : 23,
-        right : 20,
+        bottom : 100,
+        right : 40,
         backgroundColor : '#FFD4CA',
         borderRadius : 100,
         shadowColor : '#000',
@@ -57,7 +57,10 @@ const styles = StyleSheet.create({
     },
    safeArea : {
     height : '100%',
-   }
+    backgroundColor : '#a0a0a0',
+   },
+
+ 
  });
 
  export default styles;
