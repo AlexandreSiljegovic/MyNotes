@@ -3,10 +3,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import updateNote from './updatingNote';
 
 export default async function SaveNote(note, navigation){
-    if(note.note === '' || note.title === ''){
+    if(note.note === '' || note.title === '' || !note.importance  ){
         Alert.alert(
-            'ERRO',
-            'Title and Description are required.',
+            'ERROR',
+            'Title, Description and Importance are required.',
             [
                 {
                     text:'OK',
@@ -24,12 +24,12 @@ export default async function SaveNote(note, navigation){
             if(note.id){
                 data = updateNote(data,note);
             }else{
-                // Add an ID to the new note
+                
                 note.id = data.length > 0 ? Math.max(...data.map(note => note.id)) + 1 : 1;
                 data.push(note);
             }
 
-            // Always store the notes as an array
+            
             await AsyncStorage.setItem('notes',JSON.stringify(data));
             navigation.goBack();
         }catch(err){

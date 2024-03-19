@@ -12,13 +12,13 @@ import { Feather } from "@expo/vector-icons";
 import Style from "./style";
 import Save from "../../components/saveNote";
 import Delete from "../../components/deleteNote";
-import ModalNotification from "../../components/Notification";
 import RNPickerSelect from 'react-native-picker-select';
 import { StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 
-export default function Notes({ route, navigation }) {
+export default function Notes({ route, navigation, importance }) {
   const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 16,
@@ -30,17 +30,39 @@ export default function Notes({ route, navigation }) {
     color: 'black',
     paddingRight: 30,
     alignItems : 'center',
-    justifyContent : 'center' // to ensure the text is never behind the icon
+    justifyContent : 'center',
+    shadowColor : '#000',
+        shadowOffset : {
+            width : 0,
+            height : 2,
+        },
+        shadowOpacity : 0.25,
+        shadowRadius : 3.84,
+        elevation : 5,
+        backgroundColor : '#fff', 
+        borderRadius : 10,
   },
   inputAndroid: {
     fontSize: 16,
+    paddingVertical: 12,
     paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 0.8,
-    borderColor: 'purple',
-    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 4,
     color: 'black',
-    paddingRight: 30, // to ensure the text is never behind the icon
+    paddingRight: 30,
+    alignItems : 'center',
+    justifyContent : 'center',
+    shadowColor : '#000',
+        shadowOffset : {
+            width : 0,
+            height : 2,
+        },
+        shadowOpacity : 0.25,
+        shadowRadius : 3.84,
+        elevation : 5,
+        backgroundColor : '#fff', 
+        borderRadius : 10,
   },
 });
   const [date, setDate] = useState(new Date());
@@ -50,8 +72,27 @@ export default function Notes({ route, navigation }) {
     note: "",
     date: date,
     notificationId: null,
+    importance: "",
   });
-  const [modalVisible, setModalVisible] = useState(false);
+
+ 
+
+  // Apply dynamic background color based on importance
+  // const noteStyles = {
+  //   backgroundColor: getBackgroundColor(),
+  //   padding: 10,
+  //   marginBottom: 10,
+  //   borderRadius: 10,
+  //   shadowColor: "#000",
+  //   shadowOffset: {
+  //     width: 0,
+  //     height: 2,
+  //   },
+  //   shadowOpacity: 0.25,
+  //   shadowRadius: 3.84,
+  //   elevation: 5,
+  // };
+
   
   useEffect(() => {
     if (route.params.note) {
@@ -59,37 +100,15 @@ export default function Notes({ route, navigation }) {
     }
   }, []);
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => {
-        return (
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              paddingRight: 20,
-            }}
-          >
-            {/* <TouchableOpacity onPress={() => Save(note, navigation)}>
-                <Feather name="save" size={24} color="black" />
-              </TouchableOpacity> */}
-            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-              <Feather name="bell" size={24} color="white" />
-            </TouchableOpacity>
-            {/* <TouchableOpacity onPress={() => Delete(note, navigation)}>
-                <Feather name="trash-2" size={24} color="black" />
-              </TouchableOpacity> */}
-          </View>
-        );
-      },
-    });
-  }, [navigation, note]);
 
-  const [importance, setImportance] = useState("");
+
+  const [important, setImportant] = useState("");
   
-  const handleImportanceChange = (value) => {
-    setImportance(value);
+const handleImportantChange = (importance) => {
+    setNote(prevNote => ({
+      ...prevNote,
+      importance: importance // Update the importance property of the note state
+    }));
   };
 
   return (
@@ -118,25 +137,20 @@ export default function Notes({ route, navigation }) {
  
   placeholder={{ label: "Select Importance", value: null }}
   Icon={() => {
-    return <ion-icon ios="heart-outline" md="heart-sharp"></ion-icon>;
+    return <Feather name="chevron-down" size={46} color="black" />;
   }}
-  onValueChange={handleImportanceChange}
+  onValueChange={handleImportantChange}
+  
+  
   items={[
-    { label: "Low", value: "low" },
-    { label: "Medium", value: "medium" },
-    { label: "High", value: "high" },
+    { label: "Reminder", value: "reminder" },
+    { label: "Normal", value: "normal" },
+    { label: "Important", value: "important" },
   ]}
 />
 
       
-      <ModalNotification
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-        date={date}
-        setDate={setDate}
-        note={note}
-        setNote={setNote}
-      />
+     
       <View
         style={{
           width: "100%",
@@ -147,29 +161,31 @@ export default function Notes({ route, navigation }) {
           bottom: 0,
         }}
       >
+        
         <TouchableOpacity
           style={[
             Style.actionButton,
             {
-              backgroundColor: "#017CE9",
-              flex: 1,
-            },
-          ]}
-          onPress={() => Save(note, navigation)}
-        >
-          <Feather name="save" size={29} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            Style.actionButton,
-            {
-              backgroundColor: "#DF4843",
+              backgroundColor: "#F45B69",
               flex: 1,
             },
           ]}
           onPress={() => Delete(note, navigation)}
         >
           <Feather name="trash-2" size={24} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            Style.actionButton,
+            {
+              backgroundColor: "#456990",
+              flex: 1,
+            },
+            
+          ]}
+          onPress={() => Save(note, navigation)}
+        >
+          <Feather name="save" size={29} color="white" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>

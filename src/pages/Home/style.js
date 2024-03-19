@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         position : 'absolute',
         bottom : 23,
         right : 20,
-        backgroundColor : '#fff',
+        backgroundColor : '#FFD4CA',
         borderRadius : 100,
         shadowColor : '#000',
         shadowOffset : {

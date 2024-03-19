@@ -16,31 +16,11 @@ import Style from "./style";
 import Colors from "../../styles/colors";
 import Notes from "../../components/RenderNotes";
 
-// Function to check IDs of notes
-async function checkNotesIds() {
-  try {
-    const notes = JSON.parse(await AsyncStorage.getItem("notes"));
 
-    if (!notes || !Array.isArray(notes)) {
-      console.log('No notes found or notes are not in the expected format.');
-      return;
-    }
-
-    notes.forEach((note, index) => {
-      if (note.id !== undefined) {
-        console.log(`Note at index ${index} has ID: ${note.id}`);
-      } else {
-        console.log(`Note at index ${index} does not have an ID.`);
-      }
-    });
-  } catch (error) {
-    console.error('An error occurred while checking notes IDs:', error);
-  }
-}
-
-export default function Home({ navigation }) {
+export default function Home({ navigation, }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+   
 
   useFocusEffect(
     React.useCallback(() => {
@@ -63,6 +43,7 @@ export default function Home({ navigation }) {
       getData();
     }, [])
   );
+  
 
   if (loading) {
     return (
@@ -83,7 +64,8 @@ export default function Home({ navigation }) {
           }
           data={data}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => {
+          renderItem={({ item, }) => {
+           
             return <Notes item={item} navigation={navigation} />;
           }}
         />
@@ -93,7 +75,7 @@ export default function Home({ navigation }) {
         >
           <AntDesign name="pluscircle" size={60} color={Colors.addButton} />
         </TouchableOpacity>
-        <Button title="Check Note IDs" onPress={checkNotesIds} />
+       
       </SafeAreaView>
     );
   }

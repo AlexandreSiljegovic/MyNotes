@@ -29,9 +29,16 @@ const styles = StyleSheet.create({
         
     }, 
 
-    searchArea : {
-        
-    }
+    importance : {
+        fontWeight : 'bold',
+        color : '#000',
+        fontSize : 12,
+    },
+    txDate : {
+        color: "#000",
+        fontSize: 12,
+        fontWeight: 'bold',
+    },
  });
 
 export default styles;

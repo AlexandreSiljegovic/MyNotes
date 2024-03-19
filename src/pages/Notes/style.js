@@ -18,7 +18,16 @@ const Style = StyleSheet.create({
         borderWidth: 0.6,
         borderRadius: 15,
         marginBottom: 20,
-        height : '15%'
+        height : '15%',
+         shadowColor : '#000',
+        shadowOffset : {
+            width : 0,
+            height : 2,
+        },
+        shadowOpacity : 0.25,
+        shadowRadius : 3.84,
+        elevation : 5,
+        backgroundColor : '#fff',
         
 
     },
@@ -29,7 +38,16 @@ const Style = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 20,
         fontSize: 20,
-        color : "#808080"
+        color : "#808080",
+         shadowColor : '#000',
+        shadowOffset : {
+            width : 0,
+            height : 2,
+        },
+        shadowOpacity : 0.25,
+        shadowRadius : 3.84,
+        elevation : 5,
+        backgroundColor : '#fff',
     }, 
     actionButton : {
         borderRadius: 10,
@@ -46,7 +64,7 @@ const Style = StyleSheet.create({
         borderRadius: 15,
         marginBottom: 20,
         height : '15%'
-        
+
 
 
     }
