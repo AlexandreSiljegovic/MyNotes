@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     addNoteButton : {
         zIndex : 10,
         position : 'absolute',
-        bottom : 100,
+        bottom : 60,
         right : 40,
         backgroundColor : '#FFD4CA',
         borderRadius : 100,

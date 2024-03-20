@@ -1,8 +1,10 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import Colors from '../../styles/colors';
 
+
 const width = (Dimensions.get('window').width - 60) / 1
 const height = (Dimensions.get('window').height - 400) / 2 
+
 const styles = StyleSheet.create({
     noteArea : {
         backgroundColor: Colors.notes,
@@ -22,6 +24,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: "#000",
+        fontFamily : 'Montserrat_400Regular_Italic',
     },
     txNote : {
         

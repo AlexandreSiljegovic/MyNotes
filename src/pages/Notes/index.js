@@ -16,9 +16,10 @@ import RNPickerSelect from 'react-native-picker-select';
 import { StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-
+import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat'
 
 export default function Notes({ route, navigation }) {
+   
   const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 16,
@@ -75,7 +76,7 @@ export default function Notes({ route, navigation }) {
     importance: "",
   });
 
- 
+
 
  
   
@@ -100,7 +101,7 @@ const handleImportantChange = (importance) => {
     <SafeAreaView style={Style.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accesible={false}>
         <TextInput
-          style={Style.txtTitleNote}
+          style={[Style.txtTitleNote,  {fontFamily : 'Montserrat_400Regular'}]}
           autoFocus={false}
           maxLength={40}
           value={note.title}
@@ -110,11 +111,12 @@ const handleImportantChange = (importance) => {
       </TouchableWithoutFeedback>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accesible={false}>
         <TextInput
-          style={Style.txtInput}
+          style={[Style.txtInput, {fontFamily : 'Montserrat_400Regular'}]}
           multiline={true}
           value={note.note}
           placeholder={"Description"}
           onChangeText={(text) => setNote({ ...note, note: text })}
+          
         ></TextInput>
       </TouchableWithoutFeedback>
      <RNPickerSelect

@@ -17,11 +17,13 @@ import Colors from "../../styles/colors";
 import Notes from "../../components/RenderNotes";
 import {Feather} from "@expo/vector-icons";
 import { BulbFilled, BulbOutlined } from "@ant-design/icons";
+import { Montserrat_400Regular_Italic, useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat'
 
 export default function Home({ navigation }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
+
 
   useFocusEffect(
     React.useCallback(() => {
@@ -66,7 +68,7 @@ export default function Home({ navigation }) {
     );
   } else {
     return (
-      <SafeAreaView style={containerStyle}>
+      <SafeAreaView style={[Style.safeArea, containerStyle, {fontFamily : 'Montserrat_400Regular_Italic'}]}>
         <View style={Style.header}>
           <View style={{flexDirection : 'row', justifyContent :'flex-end', marginRight : 30, marginTop : 20}}>
            <TouchableOpacity onPress={toggleDarkMode}>
@@ -77,14 +79,14 @@ export default function Home({ navigation }) {
             )}
           </TouchableOpacity>
           </View>
-          <Text style={{ ...Style.txTitle, ...textStyle }}>MyNotes</Text>
+          <Text style={ [Style.txTitle, textStyle, {fontFamily : 'Montserrat_400Regular_Italic'} ]}>MyNotes</Text>
          
           <View style={Style.searchArea}>
             <SearchBar data={data} onChange={setData} />
           </View>
           
         </View>
-        <FlatList style={{width : '90%', alignSelf : 'center'}}
+        <FlatList style={{width : '90%', alignSelf : 'center'} }
           ListEmptyComponent={
             <Text style={{ textAlign: "center", ...textStyle }}>
               No Notes yet !
@@ -93,7 +95,7 @@ export default function Home({ navigation }) {
           data={data}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => {
-            return <Notes item={item} navigation={navigation}  />;
+            return <Notes item={item} navigation={navigation}   />;
           }}
         />
         <TouchableOpacity

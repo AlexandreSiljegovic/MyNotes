@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";  
 import Colors from "../../styles/colors";
+import { Montserrat_400Regular } from "@expo-google-fonts/montserrat";
 
 
 const Style = StyleSheet.create({
@@ -12,7 +13,7 @@ const Style = StyleSheet.create({
     },
 
     txtInput : {
-        fontSize: 12,
+        fontSize: 17,
         padding: 15,
         width: '100%',
         borderWidth: 0.6,
