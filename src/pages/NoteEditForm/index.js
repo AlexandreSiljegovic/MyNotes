@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Text,  
+  Alert
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Style from "./style";
@@ -14,9 +16,13 @@ import Save from "../../components/saveNote";
 import Delete from "../../components/deleteNote";
 import RNPickerSelect from 'react-native-picker-select';
 import { StyleSheet } from "react-native";
-import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat'
+import { useFonts, Montserrat_400Regular, Montserrat_400Regular_Itali, Montserrat_700Bold_Italic, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat'
+import Colors from "../../styles/colors";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+
 export default function NotesEdit({ route, navigation }) {
-    
+
    // Styles pour le sélecteur de valeurs
   const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
@@ -100,6 +106,27 @@ export default function NotesEdit({ route, navigation }) {
       importance: importance 
     }));
   };
+  const handleDeleteNote = () => {
+  Alert.alert(
+    'Confirmation',
+    'Are you sure you want to delete this note?',
+    [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Delete',
+        onPress: () => {
+          Delete(note, navigation);
+        },
+        style: 'destructive',
+      },
+    ],
+    { cancelable: true }
+  );
+};
+
 
   return (
     <SafeAreaView style={Style.container}>
@@ -162,9 +189,12 @@ export default function NotesEdit({ route, navigation }) {
               flex: 1,
             },
           ]}
-          onPress={() => Delete(note, navigation)}
+           onPress={handleDeleteNote}
         >
-          <Feather name="trash-2" size={24} color="white" />
+          {/* <Feather name="trash-2" size={24} color="white" /> */}
+          
+          <MaterialCommunityIcons name="note-remove-outline" size={43} color="#fff" />
+          
         </TouchableOpacity>
 
         {/* Bouton pour enregistrer la note */}
@@ -178,7 +208,8 @@ export default function NotesEdit({ route, navigation }) {
           ]}
           onPress={() => Save(note, navigation)}
         >
-          <Feather name="save" size={29} color="white" />
+          {/* <Feather name="save" size={29} color="white" /> */}
+           <MaterialCommunityIcons name="note-edit-outline" size={43} color="#fff" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>

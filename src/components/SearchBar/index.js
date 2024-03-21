@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput } from "react-native";
+import { View, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native";
 import Style from "./style";
 
 export default function SearchBar({ data, onChange }) {
@@ -20,15 +20,18 @@ export default function SearchBar({ data, onChange }) {
   };
 
   return (
-    <View
-     
-    >
-      <TextInput
+  
+    <View>
+      
+      <TextInput 
+        
         placeholder="Search Tasks..."
         maxLength={50}
         onChangeText={(text) => search(text)}
         style={Style.searchArea}
       />
-    </View>
+     
+    </View> 
+    
   );
 }

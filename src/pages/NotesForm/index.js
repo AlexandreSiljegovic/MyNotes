@@ -9,9 +9,9 @@ import {
   Keyboard,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Style from "./style";
 import Save from "../../components/saveNote";
-import Delete from "../../components/deleteNote";
 import RNPickerSelect from 'react-native-picker-select';
 import { StyleSheet } from "react-native";
 import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat'
@@ -149,18 +149,7 @@ const handleImportantChange = (importance) => {
         }}
       >
         
-        {/* <TouchableOpacity
-          style={[
-            Style.actionButton,
-            {
-              backgroundColor: "#F45B69",
-              flex: 1,
-            },
-          ]}
-          onPress={() => Delete(note, navigation)}
-        >
-          <Feather name="trash-2" size={24} color="white" />
-        </TouchableOpacity> */}
+       
         <TouchableOpacity
           style={[
             Style.actionButton,
@@ -172,7 +161,7 @@ const handleImportantChange = (importance) => {
           ]}
           onPress={() => Save(note, navigation)}
         >
-          <Feather name="save" size={29} color="white" />
+          <MaterialCommunityIcons name="note-plus-outline" size={43} color="#fff" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>

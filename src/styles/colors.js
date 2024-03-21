@@ -7,6 +7,8 @@ const COLORS = {
     addButton : "#017CE9",
     loadingIndicator : "#0000ff",
     searchBar : "#d3d3d3",
+    pinkPale : "#FFD4CA",
+    blue : "#456990",
 }
 
 export default COLORS;

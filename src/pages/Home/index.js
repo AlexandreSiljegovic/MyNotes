@@ -7,6 +7,8 @@ import {
   ActivityIndicator,
   View,
   Button,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
@@ -62,12 +64,15 @@ export default function Home({ navigation }) {
 
   if (loading) {
     return (
+      
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ActivityIndicator size={"large"} color={Colors.loading} />
       </View>
     );
   } else {
     return (
+     
+      
       <SafeAreaView style={[Style.safeArea, containerStyle, {fontFamily : 'Montserrat_400Regular_Italic'}]}>
         <View style={Style.header}>
           <View style={{flexDirection : 'row', justifyContent :'flex-end', marginRight : 30, marginTop : 20}}>
@@ -80,15 +85,15 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
           </View>
           <Text style={ [Style.txTitle, textStyle, {fontFamily : 'Montserrat_400Regular_Italic'} ]}>MyNotes</Text>
-         
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={Style.searchArea}>
             <SearchBar data={data} onChange={setData} />
           </View>
-          
+          </TouchableWithoutFeedback>
         </View>
         <FlatList style={{width : '90%', alignSelf : 'center'} }
           ListEmptyComponent={
-            <Text style={{ textAlign: "center", ...textStyle }}>
+            <Text style={{ textAlign: "center", ...textStyle, color: isDarkMode ? "#fff" : "#000" }}>
               No Notes yet !
             </Text>
           }
@@ -105,6 +110,7 @@ export default function Home({ navigation }) {
           <AntDesign name="pluscircle" size={60} style={textStyle} />
         </TouchableOpacity>
       </SafeAreaView>
+      
     );
   }
 }
