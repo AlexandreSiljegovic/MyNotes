@@ -2,13 +2,11 @@ import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Style from "./style";
-import Notes from "../../pages/Notes";
 import { Montserrat_400Regular, useFonts, Montserrat_400Regular_Italic } from '@expo-google-fonts/montserrat'
+import Edit from "../../pages/NoteEditForm";
 
 export default function renderNote({ item, navigation }) {
-
- const formatDate = (dateString) => {
-    let [fontsLoaded] = useFonts({
+  let [fontsLoaded] = useFonts({
     'Montserrat_400Regular_Italic': require("@expo-google-fonts/montserrat/Montserrat_400Regular_Italic.ttf"),
     'Montserrat_400Regular': require("@expo-google-fonts/montserrat/Montserrat_400Regular.ttf"),
 
@@ -17,6 +15,11 @@ export default function renderNote({ item, navigation }) {
   if (!fontsLoaded) {
     return null;
   }
+
+ const formatDate = (dateString) => {
+
+
+    
     const date = new Date(dateString);
     //  formatage de date
     const options = {
@@ -50,7 +53,7 @@ export default function renderNote({ item, navigation }) {
   return (
     <TouchableOpacity  
       style={[Style.noteArea, noteStyle]}
-      onPress={() => navigation.navigate("Notes", { note: item, search: true })}
+      onPress={() => navigation.navigate("NotesEdit", { note: item, search: true })}
     >
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         

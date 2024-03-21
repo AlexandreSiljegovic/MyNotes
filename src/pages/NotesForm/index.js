@@ -14,10 +14,7 @@ import Save from "../../components/saveNote";
 import Delete from "../../components/deleteNote";
 import RNPickerSelect from 'react-native-picker-select';
 import { StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat'
-
 export default function Notes({ route, navigation }) {
    
   const pickerSelectStyles = StyleSheet.create({
@@ -76,6 +73,7 @@ export default function Notes({ route, navigation }) {
     importance: "",
   });
 
+const [importance, setImportance] = useState(note.importance);
 
 
  
@@ -119,22 +117,24 @@ const handleImportantChange = (importance) => {
           
         ></TextInput>
       </TouchableWithoutFeedback>
-     <RNPickerSelect
+   <RNPickerSelect
   style={pickerSelectStyles}
- 
+  value={importance} // Définissez la valeur initiale du select avec la valeur de l'importance
   placeholder={{ label: "Select Importance", value: null }}
   Icon={() => {
     return <Feather name="chevron-down" size={46} color="black" />;
   }}
-  onValueChange={handleImportantChange}
-  
-  
+  onValueChange={(value) => {
+    setImportance(value);
+    handleImportantChange(value);
+  }}
   items={[
     { label: "Reminder", value: "reminder" },
     { label: "Normal", value: "normal" },
     { label: "Important", value: "important" },
   ]}
 />
+
 
       
      
@@ -149,7 +149,7 @@ const handleImportantChange = (importance) => {
         }}
       >
         
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={[
             Style.actionButton,
             {
@@ -160,7 +160,7 @@ const handleImportantChange = (importance) => {
           onPress={() => Delete(note, navigation)}
         >
           <Feather name="trash-2" size={24} color="white" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           style={[
             Style.actionButton,
