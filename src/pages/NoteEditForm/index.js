@@ -101,6 +101,7 @@ export default function NotesEdit({ route, navigation }) {
 
   // Fonction pour gérer le changement de l'importance de la note
   const handleImportantChange = (importance) => {
+    setImportance(importance);
     setNote(prevNote => ({
       ...prevNote,
       importance: importance 

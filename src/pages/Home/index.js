@@ -9,8 +9,10 @@ import {
   Button,
   Keyboard,
   TouchableWithoutFeedback,
+  useColorScheme,
+  Dimensions,
 } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SearchBar from "../../components/SearchBar";
@@ -24,7 +26,9 @@ import { Montserrat_400Regular_Italic, useFonts, Montserrat_400Regular } from '@
 export default function Home({ navigation }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const deviceColorScheme = useColorScheme();
+  const [isDarkMode, setIsDarkMode] = useState(deviceColorScheme === "dark");
+  const screenHeight = Dimensions.get('window').height;
 
 
   useFocusEffect(
@@ -78,9 +82,9 @@ export default function Home({ navigation }) {
           <View style={{flexDirection : 'row', justifyContent :'flex-end', marginRight : 30, marginTop : 20}}>
            <TouchableOpacity onPress={toggleDarkMode}>
             {isDarkMode ? (
-              <Feather name="sun" style={{ fontSize: 30, color: "white" }} />
+              <Feather name="sun" style={{ fontSize: 30, color: "white", marginTop: screenHeight * 0.03 }} />
             ) : (
-              <Feather name="moon" style={{ fontSize: 30, color: "black" }}  />
+              <Feather name="moon" style={{ fontSize: 30, color: "black", marginTop: screenHeight * 0.03  }}  />
             )}
           </TouchableOpacity>
           </View>
