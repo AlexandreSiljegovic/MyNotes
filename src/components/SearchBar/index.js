@@ -25,7 +25,7 @@ export default function SearchBar({ data, onChange }) {
       
       <TextInput 
         
-        placeholder="Search Tasks..."
+        placeholder="Search Notes..."
         maxLength={50}
         onChangeText={(text) => search(text)}
         style={Style.searchArea}

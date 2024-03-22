@@ -11,7 +11,7 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Style from "./style";
-import Save from "../../components/saveNote";
+import Save from "../../components/FunctionsNotes/saveNote";
 import RNPickerSelect from 'react-native-picker-select';
 import { StyleSheet } from "react-native";
 import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat'
@@ -39,6 +39,9 @@ export default function Notes({ route, navigation }) {
         elevation : 5,
         backgroundColor : '#fff', 
         borderRadius : 10,
+        backgroundColor : '#fff',
+        color : importanceColor(importance),
+       
   },
   inputAndroid: {
     fontSize: 16,
@@ -61,8 +64,21 @@ export default function Notes({ route, navigation }) {
         elevation : 5,
         backgroundColor : '#fff', 
         borderRadius : 10,
+        color : importanceColor(importance),
   },
 });
+const importanceColor = (importance) => {
+  switch (importance) {
+    case 'reminder':
+      return '#7EE4EC'; 
+    case 'normal':
+      return '#FFD4CA'; 
+    case 'important':
+      return '#F45B69'; 
+    default:
+      return 'black'; 
+  }
+};
   const [date, setDate] = useState(new Date());
   const [note, setNote] = useState({
     id : null,
@@ -86,7 +102,7 @@ const [importance, setImportance] = useState(note.importance);
 
 
 
-  const [important, setImportant] = useState("");
+  // const [important, setImportant] = useState("");
   
 const handleImportantChange = (importance) => {
     setNote(prevNote => ({
@@ -129,9 +145,9 @@ const handleImportantChange = (importance) => {
     handleImportantChange(value);
   }}
   items={[
-    { label: "Reminder", value: "reminder" },
-    { label: "Normal", value: "normal" },
-    { label: "Important", value: "important" },
+    { label: "Reminder", value: "reminder", color: '#000', fontFamily : 'Montserrat_400Regular',},
+    { label: "Normal", value: "normal", color : '#000' },
+    { label: "Important", value: "important", color : '#000'},
   ]}
 />
 
