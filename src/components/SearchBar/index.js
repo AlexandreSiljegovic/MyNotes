@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { View, TextInput} from "react-native";
 import Style from "./style";
 
 export default function SearchBar({ data, onChange }) {

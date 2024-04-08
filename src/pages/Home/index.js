@@ -6,7 +6,6 @@ import {
   Text,
   ActivityIndicator,
   View,
-  Button,
   Keyboard,
   TouchableWithoutFeedback,
   useColorScheme,
@@ -21,7 +20,7 @@ import Colors from "../../styles/colors";
 import Notes from "../../components/RenderNotes";
 import {Feather} from "@expo/vector-icons";
 import { BulbFilled, BulbOutlined } from "@ant-design/icons";
-import { Montserrat_400Regular_Italic, useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat'
+import { Montserrat_400Regular_Italic, useFonts, Montserrat_400Regular,  } from '@expo-google-fonts/montserrat'
 
 export default function Home({ navigation }) {
   const [data, setData] = useState(null);
@@ -29,6 +28,7 @@ export default function Home({ navigation }) {
   const deviceColorScheme = useColorScheme();
   const [isDarkMode, setIsDarkMode] = useState(deviceColorScheme === "dark");
   const screenHeight = Dimensions.get('window').height;
+ 
 
 
   useFocusEffect(
@@ -52,7 +52,16 @@ export default function Home({ navigation }) {
       getData();
     }, [])
   );
+  let [fontsLoaded] = useFonts({
+    'Montserrat_400Regular_Italic': require("@expo-google-fonts/montserrat/Montserrat_400Regular_Italic.ttf"),
+    'Montserrat_400Regular': require("@expo-google-fonts/montserrat/Montserrat_400Regular.ttf"),
+    'Montserrat_700Bold': require("@expo-google-fonts/montserrat/Montserrat_700Bold.ttf"),
 
+  });
+  
+  if (!fontsLoaded) {
+    return null;
+  }
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
@@ -88,7 +97,7 @@ export default function Home({ navigation }) {
             )}
           </TouchableOpacity>
           </View>
-          <Text style={ [Style.txTitle, textStyle, {fontFamily : 'Montserrat_400Regular_Italic'} ]}>MyNotes</Text>
+          <Text style={ [Style.txTitle, textStyle, {fontFamily : 'Montserrat_700Bold'} ]}>MyNotes</Text>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={Style.searchArea}>
             <SearchBar data={data} onChange={setData} />

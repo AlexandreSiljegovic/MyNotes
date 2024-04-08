@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect} from "react";
 import {
   SafeAreaView,
   View,
-  ScrollView,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -16,6 +15,18 @@ import RNPickerSelect from 'react-native-picker-select';
 import { StyleSheet } from "react-native";
 import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat'
 export default function Notes({ route, navigation }) {
+  const importanceColor = (importance) => {
+    switch (importance) {
+      case 'reminder':
+        return '#7EE4EC'; 
+      case 'normal':
+        return '#FFD4CA'; 
+      case 'important':
+        return '#F45B69'; 
+      default:
+        return 'black'; 
+    }
+  };
    
   const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
@@ -67,18 +78,7 @@ export default function Notes({ route, navigation }) {
         color : importanceColor(importance),
   },
 });
-const importanceColor = (importance) => {
-  switch (importance) {
-    case 'reminder':
-      return '#7EE4EC'; 
-    case 'normal':
-      return '#FFD4CA'; 
-    case 'important':
-      return '#F45B69'; 
-    default:
-      return 'black'; 
-  }
-};
+
   const [date, setDate] = useState(new Date());
   const [note, setNote] = useState({
     id : null,

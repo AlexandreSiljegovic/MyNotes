@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   View,
-  ScrollView,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
-  Text,  
   Alert
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
@@ -17,7 +15,6 @@ import Delete from "../../components/FunctionsNotes/deleteNote";
 import RNPickerSelect from 'react-native-picker-select';
 import { StyleSheet } from "react-native";
 import { useFonts, Montserrat_400Regular, Montserrat_400Regular_Itali, Montserrat_700Bold_Italic, Montserrat_600SemiBold } from '@expo-google-fonts/montserrat'
-import Colors from "../../styles/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
