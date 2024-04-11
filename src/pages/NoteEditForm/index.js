@@ -80,6 +80,7 @@ export default function NotesEdit({ route, navigation }) {
     notificationId: null,
     importance: "",
   });
+
   const hasUnsavedChanges = Boolean(note.title || note.note || note.importance);
 
   React.useEffect(
@@ -88,26 +89,26 @@ export default function NotesEdit({ route, navigation }) {
         if (!hasUnsavedChanges) {
           // If we don't have unsaved changes, then we don't need to do anything
           return;
+        } else {
+          e.preventDefault();
+          Alert.alert(
+            'Discard changes?',
+            'You have unsaved changes. Are you sure to discard them and leave the screen?',
+            [
+              { text: "Don't leave", style: 'cancel', onPress: () => {} },
+              {
+                text: 'Discard',
+                style: 'destructive',
+                // If the user confirmed, then we dispatch the action we blocked earlier
+                // This will continue the action that had triggered the removal of the screen
+                onPress: () => navigation.dispatch(e.data.action),
+              },
+            ]
+          );
         }
 
-        // Prevent default behavior of leaving the screen
-        e.preventDefault();
-
-        // Prompt the user before leaving the screen
-        Alert.alert(
-          'Discard changes?',
-          'You have unsaved changes. Are you sure to discard them and leave the screen?',
-          [
-            { text: "Don't leave", style: 'cancel', onPress: () => {} },
-            {
-              text: 'Discard',
-              style: 'destructive',
-              // If the user confirmed, then we dispatch the action we blocked earlier
-              // This will continue the action that had triggered the removal of the screen
-              onPress: () => navigation.dispatch(e.data.action),
-            },
-          ]
-        );
+       
+       
       }),
     [navigation, hasUnsavedChanges]
   );
@@ -159,10 +160,10 @@ export default function NotesEdit({ route, navigation }) {
 };
 
 
-  return (
+  return (  <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <SafeAreaView style={Style.container}>
       {/* Zone de saisie pour le titre de la note */}
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    
         <TextInput
           style={[Style.txtTitleNote,  {fontFamily : 'Montserrat_400Regular'}]}
           autoFocus={false}
@@ -171,10 +172,10 @@ export default function NotesEdit({ route, navigation }) {
           placeholder={"Title"}
           onChangeText={(text) => setNote({ ...note, title: text })}
         />
-      </TouchableWithoutFeedback>
+   
 
       {/* Zone de saisie pour la description de la note */}
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+     
         <TextInput
           style={[Style.txtInput, {fontFamily : 'Montserrat_400Regular'}]}
           multiline={true}
@@ -182,7 +183,7 @@ export default function NotesEdit({ route, navigation }) {
           placeholder={"Description"}
           onChangeText={(text) => setNote({ ...note, note: text })}
         />
-      </TouchableWithoutFeedback>
+      
 
       {/* Sélecteur de valeurs pour l'importance de la note */}
       <RNPickerSelect
@@ -244,6 +245,7 @@ export default function NotesEdit({ route, navigation }) {
         </TouchableOpacity>
       </View>
     </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
 

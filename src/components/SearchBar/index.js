@@ -3,6 +3,7 @@ import { View, TextInput} from "react-native";
 import Style from "./style";
 
 export default function SearchBar({ data, onChange }) {
+  // Fonction pour rechercher une note
   const [masterData, setMasterData] = useState(data);
   const search = (text) => {
     if (text) {

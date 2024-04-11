@@ -15,6 +15,8 @@ import RNPickerSelect from 'react-native-picker-select';
 import { StyleSheet } from "react-native";
 import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat'
 export default function Notes({ route, navigation }) {
+  
+  // Fonction pour attribuer une couleur à l'importance de la note
   const importanceColor = (importance) => {
     switch (importance) {
       case 'reminder':
@@ -27,7 +29,7 @@ export default function Notes({ route, navigation }) {
         return 'black'; 
     }
   };
-   
+   // Styles pour le sélecteur de valeurs
   const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     fontSize: 16,
@@ -78,7 +80,7 @@ export default function Notes({ route, navigation }) {
         color : importanceColor(importance),
   },
 });
-
+// État pour la date de la note
   const [date, setDate] = useState(new Date());
   const [note, setNote] = useState({
     id : null,
@@ -93,7 +95,7 @@ const [importance, setImportance] = useState(note.importance);
 
 
  
-  
+  // mise à jour d'état pour la note
   useEffect(() => {
     if (route.params.note) {
       setNote(route.params.note);
@@ -101,9 +103,7 @@ const [importance, setImportance] = useState(note.importance);
   }, []);
 
 
-
-  // const [important, setImportant] = useState("");
-  
+  // gérer l'importance de la note 
 const handleImportantChange = (importance) => {
     setNote(prevNote => ({
       ...prevNote,
@@ -111,9 +111,10 @@ const handleImportantChange = (importance) => {
     }));
   };
 
-  return (
+  return (<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <SafeAreaView style={Style.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accesible={false}>
+      
+      
         <TextInput
           style={[Style.txtTitleNote,  {fontFamily : 'Montserrat_400Regular'}]}
           autoFocus={false}
@@ -122,8 +123,8 @@ const handleImportantChange = (importance) => {
           placeholder={"Title"}
           onChangeText={(text) => setNote({ ...note, title: text })}
         ></TextInput>
-      </TouchableWithoutFeedback>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accesible={false}>
+      
+    
         <TextInput
           style={[Style.txtInput, {fontFamily : 'Montserrat_400Regular'}]}
           multiline={true}
@@ -132,7 +133,8 @@ const handleImportantChange = (importance) => {
           onChangeText={(text) => setNote({ ...note, note: text })}
           
         ></TextInput>
-      </TouchableWithoutFeedback>
+
+      {/* select afin de selectionner l'importance de la note et attribuer la couleur correspondante */}
    <RNPickerSelect
   style={pickerSelectStyles}
   value={importance} // Définissez la valeur initiale du select avec la valeur de l'importance
@@ -181,5 +183,7 @@ const handleImportantChange = (importance) => {
         </TouchableOpacity>
       </View>
     </SafeAreaView>
+    </TouchableWithoutFeedback>
+    
   );
 }

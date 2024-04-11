@@ -30,7 +30,7 @@ export default function Home({ navigation }) {
   const screenHeight = Dimensions.get('window').height;
  
 
-
+// Fonction pour récupérer les notes 
   useFocusEffect(
     React.useCallback(() => {
       setLoading(true);
@@ -52,6 +52,7 @@ export default function Home({ navigation }) {
       getData();
     }, [])
   );
+  // Fonction pour charger les polices
   let [fontsLoaded] = useFonts({
     'Montserrat_400Regular_Italic': require("@expo-google-fonts/montserrat/Montserrat_400Regular_Italic.ttf"),
     'Montserrat_400Regular': require("@expo-google-fonts/montserrat/Montserrat_400Regular.ttf"),
@@ -62,10 +63,12 @@ export default function Home({ navigation }) {
   if (!fontsLoaded) {
     return null;
   }
+  // Fonction pour activer le mode sombre
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
 
+  // Styles pour le conteneur et le texte
   const containerStyle = {
     ...[Style.safeArea, Style.header],
     backgroundColor: isDarkMode ? "#000" : "#fff",
@@ -74,7 +77,7 @@ export default function Home({ navigation }) {
   const textStyle = {
     color: isDarkMode ? "#fff" : "#000",
   };
-
+// Si le chargement est en cours, afficher un indicateur de chargement
   if (loading) {
     return (
       
@@ -104,6 +107,7 @@ export default function Home({ navigation }) {
           </View>
           </TouchableWithoutFeedback>
         </View>
+       
         <FlatList style={{width : '90%', alignSelf : 'center'} }
           ListEmptyComponent={
             <Text style={{ textAlign: "center", ...textStyle, color: isDarkMode ? "#fff" : "#000" }}>

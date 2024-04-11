@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import updateNote from './updatingNote';
 
 export default async function SaveNote(note, navigation){
+    // Vérifier si les champs sont vides
     if(note.note === '' || note.title === '' || !note.importance  ){
         Alert.alert(
             'ERROR',
@@ -17,6 +18,7 @@ export default async function SaveNote(note, navigation){
         )
     }else{
         try{
+            // Récupérer les notes
             let data = [];
             if(await AsyncStorage.getItem('notes') !== null){
                 data = JSON.parse(await AsyncStorage.getItem('notes'));
@@ -30,7 +32,7 @@ export default async function SaveNote(note, navigation){
                 data.push(note);
             }
 
-            
+            // Enregistrer les notes
             await AsyncStorage.setItem('notes',JSON.stringify(data));
             navigation.goBack();
         }catch(err){

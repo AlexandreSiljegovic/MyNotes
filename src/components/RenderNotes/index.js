@@ -32,7 +32,7 @@ export default function renderNote({ item, navigation }) {
     
     return date.toLocaleDateString("en-US", options);
   };
-
+// Fonction pour attribuer une couleur à l'importance de la note 
     const getBackgroundColor = () => {
     switch (item.importance) {
       case "reminder":
