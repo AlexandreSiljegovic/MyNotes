@@ -1,10 +1,23 @@
 
-import { Alert } from 'react-native'
+import React, { useState, useEffect } from "react";
+import {
+  SafeAreaView,
+  View,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Alert,
+  Text
+} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import updateNote from './updatingNote';
+import updateNote from '../../components/FunctionsNotes/updatingNote';
+
+
 
 export default async function SaveNote(note, navigation){
     // Vérifier si les champs sont vides
+   
     if(note.note === '' || note.title === '' || !note.importance  ){
         Alert.alert(
             'ERROR',
@@ -49,4 +62,5 @@ export default async function SaveNote(note, navigation){
             )
         }
     }
+    
 }
